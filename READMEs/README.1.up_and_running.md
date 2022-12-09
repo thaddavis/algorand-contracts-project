@@ -2,7 +2,7 @@
 
 ## Up and running
 
-- https://www.docker.com/
+- `https://www.docker.com/`
 
 - `https://github.com/algorand/sandbox`
 
