@@ -1,0 +1,10 @@
+{
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.autoImportCompletions": true,
+    "[python]": {
+        "editor.formatOnSave": true,
+    },
+    "python.formatting.provider": "autopep8",
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": false
+}
