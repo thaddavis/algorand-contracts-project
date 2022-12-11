@@ -4,6 +4,8 @@ import sys
 from pathlib import Path
 sys.path.append(str(Path(__file__).absolute().parent.parent))
 
+UINT64_MAX = 0xFFFFFFFFFFFFFFFF
+
 
 def approval():
     global_owner = Bytes("owner")  # byteslice
@@ -12,13 +14,29 @@ def approval():
     op_increment = Bytes("inc")
     op_decrement = Bytes("dec")
 
+    scratch_counter = ScratchVar(TealType.uint64)
+
     increment = Seq(
-        App.globalPut(global_counter, App.globalGet(global_counter) + Int(1)),
-        Approve()
+        [
+            scratch_counter.store(App.globalGet(global_counter)),
+            # check overflow
+            If(
+                scratch_counter.load() < Int(UINT64_MAX),
+                App.globalPut(global_counter, scratch_counter.load() + Int(1)),
+            ),
+            Approve(),
+        ]
     )
 
     decrement = Seq(
-        App.globalPut(global_counter, App.globalGet(global_counter) - Int(1)),
+        scratch_counter.store(App.globalGet(global_counter)),
+        # detect underflow
+        If(
+            scratch_counter.load() > Int(0)
+        )
+        .Then(
+            App.globalPut(global_counter, scratch_counter.load() - Int(1))
+        ),
         Approve()
     )
 
