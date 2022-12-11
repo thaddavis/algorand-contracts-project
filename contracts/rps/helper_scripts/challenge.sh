@@ -3,6 +3,8 @@
 # load variables from config file
 source "$(dirname ${BASH_SOURCE[0]})/config.sh"
 
+rm challenge-*
+
 # create challenge transaction
 goal app call \
     --app-id "$APP_ID" \
