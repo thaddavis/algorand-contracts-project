@@ -1,0 +1,153 @@
+{
+  "accounts": [
+    {
+      "address": "BCU6RH2MWO4X46BQPAQ4MFUFJKJDX2MBEUZ4W4VLPJVUMSFJM2GJJ345VA",
+      "amount": 1000019000121991,
+      "amount-without-pending-rewards": 1000016000073991,
+      "apps-total-schema": {
+        "num-byte-slice": 2,
+        "num-uint": 2
+      },
+      "created-apps": [
+        {
+          "id": 1,
+          "params": {
+            "approval-program": "BiACAAExGCISQAAxMRmBBRJAACcxGYEEEkAAHTEZIxJAABQxGYECEkAACjEZIhJAAAEAIkMiQyJDIkMiQ4AHY291bnRlciJngAVvd25lcjEAZyND",
+            "clear-state-program": "BoEBQw==",
+            "creator": "BCU6RH2MWO4X46BQPAQ4MFUFJKJDX2MBEUZ4W4VLPJVUMSFJM2GJJ345VA",
+            "global-state": [
+              {
+                "key": "Y291bnRlcg==",
+                "value": {
+                  "bytes": "",
+                  "type": 2,
+                  "uint": 0
+                }
+              },
+              {
+                "key": "b3duZXI=",
+                "value": {
+                  "bytes": "CKnon0yzuX54MHghxhaFSpI76YElM8tyq3prRkipZow=",
+                  "type": 1,
+                  "uint": 0
+                }
+              }
+            ],
+            "global-state-schema": {
+              "num-byte-slice": 1,
+              "num-uint": 1
+            }
+          }
+        },
+        {
+          "id": 2,
+          "params": {
+            "approval-program": "BiACAAEmAQdjb3VudGVyMRgiEkAAWDEZgQUSQABOMRmBBBJAAEQxGSMSQAA7MRmBAhJAADExGSISQAABADYaAIADaW5jEkAAFTYaAIADZGVjEkAAAQAoKGQjCWcjQygoZCMIZyNDIkMiQyJDIkMoImeABW93bmVyMQBnI0M=",
+            "clear-state-program": "BoEBQw==",
+            "creator": "BCU6RH2MWO4X46BQPAQ4MFUFJKJDX2MBEUZ4W4VLPJVUMSFJM2GJJ345VA",
+            "global-state": [
+              {
+                "key": "Y291bnRlcg==",
+                "value": {
+                  "bytes": "",
+                  "type": 2,
+                  "uint": 0
+                }
+              },
+              {
+                "key": "b3duZXI=",
+                "value": {
+                  "bytes": "CKnon0yzuX54MHghxhaFSpI76YElM8tyq3prRkipZow=",
+                  "type": 1,
+                  "uint": 0
+                }
+              }
+            ],
+            "global-state-schema": {
+              "num-byte-slice": 1,
+              "num-uint": 1
+            }
+          }
+        }
+      ],
+      "min-balance": 457000,
+      "pending-rewards": 3000048000,
+      "reward-base": 19,
+      "rewards": 19000127991,
+      "round": 766,
+      "status": "Offline",
+      "total-apps-opted-in": 0,
+      "total-assets-opted-in": 0,
+      "total-created-apps": 2,
+      "total-created-assets": 0
+    },
+    {
+      "address": "FHQPLJVRO7FVHYKCA2SGR3I7ZHHKHAQS4AGOAVGGGJQJYTTBVEJUGHN5JQ",
+      "amount": 0,
+      "amount-without-pending-rewards": 0,
+      "min-balance": 100000,
+      "pending-rewards": 0,
+      "reward-base": 19,
+      "rewards": 0,
+      "round": 766,
+      "status": "Offline",
+      "total-apps-opted-in": 0,
+      "total-assets-opted-in": 0,
+      "total-created-apps": 0,
+      "total-created-assets": 0
+    }
+  ],
+  "apps": [
+    {
+      "id": 2,
+      "params": {
+        "approval-program": "BiACAAEmAQdjb3VudGVyMRgiEkAAWDEZgQUSQABOMRmBBBJAAEQxGSMSQAA7MRmBAhJAADExGSISQAABADYaAIADaW5jEkAAFTYaAIADZGVjEkAAAQAoKGQjCWcjQygoZCMIZyNDIkMiQyJDIkMoImeABW93bmVyMQBnI0M=",
+        "clear-state-program": "BoEBQw==",
+        "creator": "BCU6RH2MWO4X46BQPAQ4MFUFJKJDX2MBEUZ4W4VLPJVUMSFJM2GJJ345VA",
+        "global-state": [
+          {
+            "key": "Y291bnRlcg==",
+            "value": {
+              "bytes": "",
+              "type": 2,
+              "uint": 0
+            }
+          },
+          {
+            "key": "b3duZXI=",
+            "value": {
+              "bytes": "CKnon0yzuX54MHghxhaFSpI76YElM8tyq3prRkipZow=",
+              "type": 1,
+              "uint": 0
+            }
+          }
+        ],
+        "global-state-schema": {
+          "num-byte-slice": 1,
+          "num-uint": 1
+        }
+      }
+    }
+  ],
+  "latest-timestamp": 1670725090,
+  "protocol-version": "https://github.com/algorandfoundation/specs/tree/d5ac876d7ede07367dbaa26e149aa42589aac1f7",
+  "round": 766,
+  "sources": null,
+  "txns": [
+    {
+  "txn": {
+    "apaa": [
+      "ZGVj"
+    ],
+    "apid": 2,
+    "fee": 1000,
+    "fv": 767,
+    "gh": "3SI23LH1Eec0kQDmcZSH8O1P+36mkI0y2z1WMYK+DoU=",
+    "lv": 1767,
+    "note": "cQLfzQRe984=",
+    "snd": "BCU6RH2MWO4X46BQPAQ4MFUFJKJDX2MBEUZ4W4VLPJVUMSFJM2GJJ345VA",
+    "type": "appl"
+  }
+}
+  ]
+}
