@@ -10,4 +10,4 @@ goal app call \
     --app-account "$OPPONENT_ACCOUNT" \
     --app-arg "str:reveal" \
     --app-arg "str:$CHALLENGER_REVEAL" \
-    --fee 3000
+    --fee 2000 # this is actually important cuz you can pay for the inner txns built in the contract here : )

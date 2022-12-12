@@ -63,6 +63,7 @@
 
 ## Another Debugging Session in algod container
 
+- ./build.sh contracts.rps.rps
 - after an ./sandbox reset
 - goal account list
 
