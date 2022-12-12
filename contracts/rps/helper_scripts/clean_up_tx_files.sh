@@ -1,0 +1,2 @@
+rm challenge-*
+rm accept-*

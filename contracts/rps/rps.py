@@ -115,9 +115,113 @@ def approval():
             Approve()
         )
 
+    @Subroutine(TealType.uint64)
+    def play_value(play: Expr):
+        first_character = ScratchVar(TealType.bytes)
+        return Seq(
+            first_character.store(Substring(play, Int(0), Int(1))),
+            Return(
+                Cond(
+                    [first_character.load() == Bytes("r"), Int(0)],
+                    [first_character.load() == Bytes("p"), Int(1)],
+                    [first_character.load() == Bytes("s"), Int(2)],
+                )
+            )
+        )
+
+    @Subroutine(TealType.uint64)
+    def winner_account_index(play: Expr, opponent_play: Expr):
+        return Return(
+            Cond(
+                [play == opponent_play, Int(2)],  # tie
+                [(play + Int(1)) % Int(3) == opponent_play, Int(1)],  # opponent wins
+                [
+                    (opponent_play + Int(1)) % Int(3) == play,
+                    Int(0),
+                ],  # current account win
+            )
+        )
+
+    @Subroutine(TealType.none)
+    def send_reward(account_index: Expr, amount: Expr):
+        return Seq(
+            InnerTxnBuilder.Begin(),
+            InnerTxnBuilder.SetFields(
+                {
+                    TxnField.type_enum: TxnType.Payment,
+                    TxnField.receiver: Txn.accounts[account_index],
+                    TxnField.amount: amount,
+                    TxnField.fee: Int(0),  # use fee pooling
+                }
+            ),
+            InnerTxnBuilder.Submit(),
+        )
+
     @Subroutine(TealType.none)
     def reveal():
-        return Reject()
+        challenger_play = ScratchVar(TealType.uint64)
+        opponent_play = ScratchVar(TealType.uint64)
+
+        winner = ScratchVar()
+        wager = ScratchVar(TealType.uint64)
+
+        return Seq(
+            program.check_self(
+                group_size=Int(1),
+                group_index=Int(0)
+            ),
+            program.check_rekey_zero(1),
+            Assert(
+                And(
+                    # check mutual opponentship
+                    App.localGet(
+                        Txn.sender(), local_opponent) == Txn.accounts[1],
+                    App.localGet(Txn.accounts[1],
+                                 local_opponent) == Txn.sender(),
+
+                    # check same wager
+                    App.localGet(Txn.sender(), local_wager) == App.localGet(
+                        Txn.accounts[1], local_wager),
+
+                    # check commitment from challenger is not empty
+                    App.localGet(Txn.sender(), local_commitment) != Bytes(""),
+
+                    # check reveal from opponent is not empty
+                    App.localGet(Txn.accounts[1], local_reveal) != Bytes(""),
+
+                    # check commit/reveal from challenger
+                    Txn.application_args.length() == Int(2),
+
+                    Sha256(Txn.application_args[1]) == App.localGet(
+                        Txn.sender(), local_commitment)
+                )
+            ),
+            challenger_play.store(play_value(Txn.application_args[1])),
+            opponent_play.store(play_value(
+                App.localGet(Txn.accounts[1], local_reveal))),
+            wager.store(App.localGet(Txn.sender(), local_wager)),
+            winner.store(
+                winner_account_index(
+                    play_value(Txn.application_args[1]),
+                    play_value(App.localGet(Int(1), local_reveal)),
+                )
+            ),
+            If(winner.load() == Int(2))
+            .Then(
+                Seq(
+                    # tie: refund wager to each party
+                    send_reward(Int(0), wager.load()),
+                    send_reward(Int(1), wager.load()),
+                )
+            )
+            .Else(
+                # send double wager to winner
+                send_reward(winner.load(), wager.load() * Int(2))
+            ),
+            reset(Int(0)),
+            reset(Int(1)),
+            Approve()
+        )
 
     return program.event(
         init=Approve(),
