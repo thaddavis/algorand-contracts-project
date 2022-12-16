@@ -5,6 +5,9 @@
         "editor.formatOnSave": true,
     },
     "python.formatting.provider": "autopep8",
+    "python.formatting.autopep8Args": [
+        "--ignore", "E402"
+    ],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": false
 }
