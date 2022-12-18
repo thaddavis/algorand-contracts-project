@@ -6,7 +6,11 @@
 # user declared algod connection parameters. Node must have EnableDeveloperAPI set to true in its config
 algod_address = "http://localhost:4001"
 algod_token = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-app_id = 38
+app_id = 67
+application_account = "XIBF2HUZXFM6NONRNMIZTN2NFJTXL35ECO5DR25S73RGVH6KUJX67GLTOU"
+
 contract_creator = "TW6XVPVWA2WH6G4UDWACQM7W4WW2SX756764UFAPS77OKY4PM3PO3QEVPQ"
-application_account = "7FLPNTSK6L7ADUGYAZCONW3KPWBA7XSEYFCLQF3P5P5XHGQ3GX3BZ6WBO4"
 contract_creator_mnemonic = "gorilla addict flavor jewel sample silly opinion setup defy boy tell grid ask left crack pink village virtual bargain work upset satoshi cake above misery"
+
+alternative_account = "3MZKC2LM4M5WDSR3Z247MZOQGKEWPOKSJVZCJ5BUWU6FOUKCWWS32BCYEM"
+alternative_account_mnemonic = "blast bean input case gym today offer code invest example certain enroll put ivory chicken matrix myth ticket alert slice price capable monster absorb myth"
