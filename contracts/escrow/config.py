@@ -6,11 +6,17 @@
 # user declared algod connection parameters. Node must have EnableDeveloperAPI set to true in its config
 algod_address = "http://localhost:4001"
 algod_token = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-app_id = 67
-application_account = "XIBF2HUZXFM6NONRNMIZTN2NFJTXL35ECO5DR25S73RGVH6KUJX67GLTOU"
+app_id = 92
+application_account = "ZMBBFXSXSKMMDPCAZBLSMQT3YQ6NS7BRSMQQ2OYNKRBTYHQMVCCIHJKKMQ"
 
 contract_creator = "TW6XVPVWA2WH6G4UDWACQM7W4WW2SX756764UFAPS77OKY4PM3PO3QEVPQ"
 contract_creator_mnemonic = "gorilla addict flavor jewel sample silly opinion setup defy boy tell grid ask left crack pink village virtual bargain work upset satoshi cake above misery"
 
 alternative_account = "3MZKC2LM4M5WDSR3Z247MZOQGKEWPOKSJVZCJ5BUWU6FOUKCWWS32BCYEM"
 alternative_account_mnemonic = "blast bean input case gym today offer code invest example certain enroll put ivory chicken matrix myth ticket alert slice price capable monster absorb myth"
+
+buyer_account = "BFNUQRMZILOFGUCSVGI7SJ4NP4BHNAC2IQ5TIXKS2RHTJ3GQPWMKA4UGWY"
+buyer_account_mnemonic = "robust bring prosper caught leopard inherit purpose meadow gown trim other venture way whip please work pistol trip trade man illegal learn that absent fire"
+
+seller_account = "UW5E4VDKSCV7UWKFQ4MDPGYJTH5VN7Z6OQJIVVR2BUB6JEWYUSTJVVIZRA"
+seller_account_mnemonic = "cave polar above carry wagon rural mirror dolphin own client result elite parade ivory element reason text glance swing material burst genuine indoor about dose"

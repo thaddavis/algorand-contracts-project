@@ -1,3 +1,13 @@
 # creator_wallet
 
 gesture pond forest grit stay bacon clap midnight owner muffin initial fix canyon remind clerk evidence mixed wrist undo hospital invest sell proof abstract mirror
+
+# buyer_wallet
+
+mnemonic: thank forward volume mansion duck over coast post found height used power ensure people clip select essence knock empower proof grace ripple odor ability vacant
+account: BFNUQRMZILOFGUCSVGI7SJ4NP4BHNAC2IQ5TIXKS2RHTJ3GQPWMKA4UGWY
+
+# seller_wallet
+
+mnemonic: kidney agent horror youth assist owner job viable squirrel noodle hospital man connect prize coast retreat prison glass apple frog cherry check harsh ability upon
+account: UW5E4VDKSCV7UWKFQ4MDPGYJTH5VN7Z6OQJIVVR2BUB6JEWYUSTJVVIZRA

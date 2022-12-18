@@ -1,4 +1,5 @@
 from ast import Num
+from typing import Any
 from algosdk import account, mnemonic
 from algosdk.future import transaction
 from algosdk.kmd import KMDClient
@@ -140,7 +141,7 @@ def format_state(state):
 # read app global state
 
 
-def read_global_state(client: AlgodClient, addr: str, app_id: Num):
+def read_global_state(client: AlgodClient, addr: Any, app_id: Num):
     results = client.account_info(addr)
     apps_created = results["created-apps"]
     for app in apps_created:
