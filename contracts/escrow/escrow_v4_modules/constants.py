@@ -6,3 +6,4 @@ GLOBAL_BUYER = Bytes("global_buyer")  # byteslice
 GLOBAL_SELLER = Bytes("global_seller")  # byteslice
 
 INCREMENT_COUNTER = Bytes("increment")  # byteslice
+CLOSE_OUT_CONTRACT_BALANCE = Bytes("close_out_contract_balance")  # byteslice

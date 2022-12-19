@@ -2,20 +2,19 @@ from algosdk.v2client import algod
 from algosdk import account
 from algosdk.future import transaction
 from algosdk.encoding import decode_address
-from contracts.escrow.escrow_v4.escrow_v4 import approval, clear
+from contracts.escrow.escrow_v5.escrow_v5 import approval, clear
 from pyteal import compileTeal, Mode
-from helpers.utils import compile_program, wait_for_confirmation, read_global_state
+from helpers.utils import compile_program, wait_for_confirmation, read_global_state, get_private_key_from_mnemonic
 import json
-
-from helpers import utils
 
 from contracts.escrow import config
 
 
 def main():
     algod_client = algod.AlgodClient(config.algod_token, config.algod_address)
-    creator_private_key = utils.get_private_key_from_mnemonic(
-        config.contract_creator_mnemonic
+    creator_private_key = get_private_key_from_mnemonic(
+        # config.contract_creator_mnemonic
+        config.buyer_account_mnemonic
     )
 
     # declare application state storage (immutable)
