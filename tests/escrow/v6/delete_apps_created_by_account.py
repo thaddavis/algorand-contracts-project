@@ -6,7 +6,7 @@ from pathlib import Path
 from algosdk.future import transaction
 
 sys.path.append(str(Path(__file__).absolute().parent.parent.parent.parent))
-import contracts.escrow.config_v6 as config
+import contracts.escrow.config as config
 from helpers.utils import get_private_key_from_mnemonic
 
 indexer_client = indexer.IndexerClient(

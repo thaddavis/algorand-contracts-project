@@ -13,3 +13,7 @@
 ## Why? Dunno
 
 - python3 -m pip install --upgrade pip
+
+## Install python packages
+
+pip install -r requirements.txt

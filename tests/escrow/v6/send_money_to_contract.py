@@ -18,18 +18,16 @@ buyer_account_private_key = get_private_key_from_mnemonic(
     config.buyer_account_mnemonic)
 
 
-def test_funding_the_account_from_buyer():
+def send_money_to_contract():
     # step 0 - check global state before `increment no_op txn`
     app_info = algod_client.application_info(config.app_id)
     app_info_formatted = format_application_info_global_state(
         app_info['params']['global-state']
     )
     creator_address = encode_address(
-        base64.b64decode(app_info_formatted["creator"]))
+        base64.b64decode(app_info_formatted["global_creator"]))
     buyer_account_address = account.address_from_private_key(
         buyer_account_private_key)
-    assert creator_address != buyer_account_address
-    # step 1
 
     params = algod_client.suggested_params()
     print("suggested params: ", params)
@@ -46,7 +44,7 @@ def test_funding_the_account_from_buyer():
     note = "Fund Contract".encode()
     amount = 100000
     # step 3 - send the txns => [0] - PaymentTxn && [1] - NoOpTxn
-    unsigned_txn_A = transaction.PaymentTxn(
+    unsigned_txn = transaction.PaymentTxn(
         sender,
         params,
         receiver,
@@ -55,26 +53,11 @@ def test_funding_the_account_from_buyer():
         note
     )
 
-    app_args = [
-        "fund_escrow"
-    ]
-    unsigned_txn_B = transaction.ApplicationNoOpTxn(
-        sender, params, config.app_id, app_args)
-
-    gid = transaction.calculate_group_id([unsigned_txn_A, unsigned_txn_B])
-    print('gid', gid)
-    unsigned_txn_A.group = gid
-    unsigned_txn_B.group = gid
-
-    signed_txn_A = unsigned_txn_A.sign(buyer_account_private_key)
-    signed_txn_B = unsigned_txn_B.sign(buyer_account_private_key)
-
-    signed_group = [signed_txn_A, signed_txn_B]
+    signed_txn = unsigned_txn.sign(buyer_account_private_key)
 
     # submit transaction
-    tx_id = algod_client.send_transactions(signed_group)
+    tx_id = algod_client.send_transactions([signed_txn])
 
-    # step 4
     # wait for confirmation
     try:
         confirmed_txn = transaction.wait_for_confirmation(
@@ -87,4 +70,4 @@ def test_funding_the_account_from_buyer():
 
 
 if __name__ == "__main__":
-    test_funding_the_account_from_buyer()
+    send_money_to_contract()

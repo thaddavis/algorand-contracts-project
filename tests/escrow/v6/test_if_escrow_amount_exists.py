@@ -10,7 +10,7 @@ from algosdk.encoding import encode_address
 
 sys.path.append(str(Path(__file__).absolute().parent.parent.parent.parent))
 
-import contracts.escrow.config as config
+import contracts.escrow.config_v6 as config
 from helpers.utils import format_application_info_global_state, format_application_info_global_state, get_private_key_from_mnemonic, wait_for_confirmation
 
 algod_client = algod.AlgodClient(config.algod_token, config.algod_address)
@@ -25,10 +25,14 @@ def test_funding_the_account_from_buyer():
         app_info['params']['global-state']
     )
     creator_address = encode_address(
-        base64.b64decode(app_info_formatted["creator"]))
+        base64.b64decode(app_info_formatted["global_creator"]))
     buyer_account_address = account.address_from_private_key(
         buyer_account_private_key)
-    assert creator_address != buyer_account_address
+
+    print("creator_address", creator_address)
+    print("buyer_account_address", buyer_account_address)
+
+    assert creator_address == buyer_account_address
     # step 1
 
     params = algod_client.suggested_params()
@@ -41,38 +45,18 @@ def test_funding_the_account_from_buyer():
     print("Application Address for app id: {}".format(
         json.dumps(app_address, indent=4)))
     # step 2 - create unsigned transaction
-    receiver = app_address
     sender = config.buyer_account
-    note = "Fund Contract".encode()
-    amount = 100000
-    # step 3 - send the txns => [0] - PaymentTxn && [1] - NoOpTxn
-    unsigned_txn_A = transaction.PaymentTxn(
-        sender,
-        params,
-        receiver,
-        amount,
-        None,
-        note
-    )
 
     app_args = [
-        "fund_escrow"
+        "has_escrow_payment_1"
     ]
-    unsigned_txn_B = transaction.ApplicationNoOpTxn(
+    unsigned_txn = transaction.ApplicationNoOpTxn(
         sender, params, config.app_id, app_args)
 
-    gid = transaction.calculate_group_id([unsigned_txn_A, unsigned_txn_B])
-    print('gid', gid)
-    unsigned_txn_A.group = gid
-    unsigned_txn_B.group = gid
-
-    signed_txn_A = unsigned_txn_A.sign(buyer_account_private_key)
-    signed_txn_B = unsigned_txn_B.sign(buyer_account_private_key)
-
-    signed_group = [signed_txn_A, signed_txn_B]
+    signed_txn = unsigned_txn.sign(buyer_account_private_key)
 
     # submit transaction
-    tx_id = algod_client.send_transactions(signed_group)
+    tx_id = algod_client.send_transactions([signed_txn])
 
     # step 4
     # wait for confirmation

@@ -130,9 +130,12 @@ def format_state(state):
             if formatted_key == "owner":
                 formatted_value = encode_address(
                     base64.b64decode(value["bytes"]))
+                formatted[formatted_key] = formatted_value
             else:
-                formatted_value = value["bytes"]
-            formatted[formatted_key] = formatted_value
+                # formatted_value = value["bytes"]
+                formatted_value = encode_address(
+                    base64.b64decode(value["bytes"]))
+                formatted[formatted_key] = formatted_value
         else:
             # integer
             formatted[formatted_key] = value["uint"]

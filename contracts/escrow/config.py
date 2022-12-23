@@ -7,7 +7,7 @@
 algod_address = "http://localhost:4001"
 indexer_address = "http://localhost:8980"
 algod_token = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-app_id = 150
+app_id = 429
 
 contract_creator = "TW6XVPVWA2WH6G4UDWACQM7W4WW2SX756764UFAPS77OKY4PM3PO3QEVPQ"
 contract_creator_mnemonic = "gorilla addict flavor jewel sample silly opinion setup defy boy tell grid ask left crack pink village virtual bargain work upset satoshi cake above misery"

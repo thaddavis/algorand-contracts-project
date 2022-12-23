@@ -7,15 +7,15 @@ from pyteal import compileTeal, Mode
 from helpers.utils import compile_program, wait_for_confirmation, read_global_state, get_private_key_from_mnemonic
 import json
 
-from contracts.escrow import config_v6
+import contracts.escrow.config_v6 as config
 
 
 def main():
     algod_client = algod.AlgodClient(
-        config_v6.algod_token, config_v6.algod_address)
+        config.algod_token, config.algod_address)
     creator_private_key = get_private_key_from_mnemonic(
         # config.contract_creator_mnemonic
-        config_v6.buyer_account_mnemonic
+        config.buyer_account_mnemonic
     )
 
     # declare application state storage (immutable)
@@ -51,9 +51,9 @@ def main():
 
     app_args = [
         decode_address(
-            config_v6.buyer_account),  # 0 buyer
+            config.buyer_account),  # 0 buyer
         decode_address(
-            config_v6.seller_account),  # 1 seller
+            config.seller_account),  # 1 seller
         100000,  # 2 1st_escrow_payment
         200000,  # 3 2nd_escrow_payment
         300000,  # 4 total escrow
@@ -66,25 +66,27 @@ def main():
     params.flat_fee = True
     params.fee = 1000
 
-    txn = transaction.ApplicationCreateTxn(
-        sender,
-        params,
-        on_complete,
-        approval_program_compiled,
-        clear_state_program_compiled,
-        global_schema,
-        local_schema,
-        app_args,
-    )
-
-    # txn = transaction.ApplicationUpdateTxn(
+    # txn = transaction.ApplicationCreateTxn(
     #     sender,
     #     params,
-    #     config.app_id,
+    #     on_complete,
     #     approval_program_compiled,
-    #     clear_program_compiled,
-    #     app_args
+    #     clear_state_program_compiled,
+    #     global_schema,
+    #     local_schema,
+    #     app_args,
     # )
+    # print("deploying new...")
+
+    txn = transaction.ApplicationUpdateTxn(
+        sender,
+        params,
+        config.app_id,
+        approval_program_compiled,
+        clear_state_program_compiled,
+        app_args
+    )
+    print("Updating...")
 
     # sign transaction
     signed_txn = txn.sign(creator_private_key)
@@ -101,20 +103,22 @@ def main():
 
     print(transaction_response)
 
-    app_id = transaction_response["application-index"]
+    # app_id = transaction_response["application-index"]
 
     # app_id = transaction_response["txn"]["txn"]["apid"]
 
-    print("Created new app-id:", app_id)
+    # print("Created new app-id:", app_id)
+#
+    # global_state = read_global_state(
+    #     algod_client, account.address_from_private_key(
+    #         creator_private_key), app_id
+    # )
 
-    global_state = read_global_state(
-        algod_client, account.address_from_private_key(
-            creator_private_key), app_id
-    )
+    # print("Global state: {}".format(
+    #     json.dumps(global_state, indent=4)
+    # ))
 
-    print("Global state: {}".format(
-        json.dumps(global_state, indent=4)
-    ))
+    print("Done")
 
 
 if __name__ == "__main__":
